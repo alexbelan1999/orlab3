@@ -29,7 +29,7 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
                     weight[edges_with_weight[i][1]] = edges_with_weight[i][2]
 
             for i in range(0,len(newEdges)):
-                print("Добавили вершину " , newEdges[i] , ": [" , marks[newEdges[i]][1] , ", " , marks[newEdges[i]][2] , "]")
+                print("Добавили вершину " , newEdges[i] , ": ребро [" , marks[newEdges[i]][1],", ",marks[newEdges[i]][0] , ", " , marks[newEdges[i]][2] , "]")
 
             print("Вершина " , edge_ , " просмотрена")
 
