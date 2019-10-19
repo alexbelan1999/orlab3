@@ -65,6 +65,7 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
     print(" ")
     Y1 = [1]
     Y1_ = []
+
     for i in range(0,len(Y1)):
         for j in range(0,edge):
             if (Y1[i] == edges_with_weight[j][0]) and (edges_with_weight[j][2] > 0) and (edges_with_weight[j][1] not in Y1):
