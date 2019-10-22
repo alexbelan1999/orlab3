@@ -12,11 +12,11 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
         marks[1] =[1, 0, math.inf]
         print(iteration, " итерация")
         iteration += 1
-
+        print("----------Шаг 1----------")
         while (vertex not in markedEdge):
             edge_ = markedEdge[0]
             print("  ")
-            print("   Просмотр ",edge_," вершины")
+            print("Просматриваем вершину: ",edge_)
             newEdges = []
             weight =[0] * edge
 
@@ -29,7 +29,7 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
                     weight[edges_with_weight[i][1]] = edges_with_weight[i][2]
 
             for i in range(0,len(newEdges)):
-                print("Добавили вершину " , newEdges[i] , ": ребро [" , marks[newEdges[i]][1],", ",marks[newEdges[i]][0] , ", " , marks[newEdges[i]][2] , "]")
+                print("Помечаем вершину " , newEdges[i] , ": [" , marks[newEdges[i]][1], ", " , marks[newEdges[i]][2] , "]")
 
             print("Вершина " , edge_ , " просмотрена")
 
@@ -42,7 +42,7 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
             break
 
         print(" ")
-        print("----------Step 2----------")
+        print("----------Шаг 2----------")
         arr_route = []
         arr_route.append(vertex)
         route = vertex
@@ -56,39 +56,39 @@ def FordFalk(nodes,edges_with_weight,edges_with_weight1):
                     route = edges_with_weight[i][0]
                     arr_route.append(route)
                     break
-
-        str_route = (" <--- ").join(str(x) for x in arr_route)
+        arr_route.reverse()
+        str_route = (" ---> ").join(str(x) for x in arr_route)
         print(str_route)
-        print("Увеличили поток на " , flow)
+        print("Увеличиваем поток на " , flow)
         print(" ")
 
     print(" ")
-    Y1 = [1]
-    Y1_ = []
+    I1 = [1]
+    I1_ = []
 
-    for i in range(0,len(Y1)):
+    for i in range(0,len(I1)):
         for j in range(0,edge):
-            if (Y1[i] == edges_with_weight[j][0]) and (edges_with_weight[j][2] > 0) and (edges_with_weight[j][1] not in Y1):
-                Y1.append(edges_with_weight[j][1])
-            elif (Y1[i] == edges_with_weight[j][1]) and (edges_with_weight[j][2] != edges_with_weight1[j][2]) and (edges_with_weight[j][0] not in Y1):
-                Y1.append(edges_with_weight[j][0])
+            if (I1[i] == edges_with_weight[j][0]) and (edges_with_weight[j][2] > 0) and (edges_with_weight[j][1] not in I1):
+                I1.append(edges_with_weight[j][1])
+            elif (I1[i] == edges_with_weight[j][1]) and (edges_with_weight[j][2] != edges_with_weight1[j][2]) and (edges_with_weight[j][0] not in I1):
+                I1.append(edges_with_weight[j][0])
 
     for i in range(1,vertex+1):
-        if (i not in Y1):
-            Y1_.append(i)
+        if (i not in I1):
+            I1_.append(i)
 
     print("--------- Разрез ---------")
-    print("I1: " , Y1)
-    print("I1_: " , Y1_)
+    print("I1: " , I1)
+    print("I1_: " , I1_)
     fluxCheck = 0
     weight = 0
     print("(I1, I1_): ")
 
     for i in range(0,edge):
-        if (edges_with_weight[i][0] in Y1) and (edges_with_weight[i][1]in Y1_) and (edges_with_weight[i][2] == 0):
+        if (edges_with_weight[i][0] in I1) and (edges_with_weight[i][1]in I1_) and (edges_with_weight[i][2] == 0):
             fluxCheck += edges_with_weight1[i][2]
             weight += edges_with_weight1[i][2]
             print("(" , edges_with_weight[i][0] , ", " , edges_with_weight[i][1] , ")")
 
-    print("d = " , weight)
+    print("d(I1, I1_) = " , weight)
     pass
